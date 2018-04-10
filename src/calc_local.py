@@ -8,7 +8,7 @@ from new2 import plot_dos, plot_transmission, ret_gf_ongrid,\
                  plot_basis, plot_gradient, import_data, lesser_gf_ongrid2,\
                  cut_matrices, get_nbasis_electrode, retarded_gf2, div,\
                  orb_grad, Jc_current, get_divJ, plot_real_matrix, gradientO4, plot_local_currents,\
-                 get_local_currents, calc_production, put_matrix_onto_grid
+                 get_local_currents, calc_production, put_matrix_onto_grid, plot_current_red
 from gpaw import setup_paths
 from my_poisson_solver import solve_directly, minus_gradient, solve_with_multigrid
 from tqdm import tqdm
@@ -178,6 +178,18 @@ def calc(path, h=0.20, co=1e-10, basis='sz', vacuum=4, xc='PBE',\
     current_c, jx_c, jy_c, jz_c, x_cor, y_cor, z_cor, gd0 = Jc_current(Gles,path,data_basename,fname)
     np.save(path+inv+data_basename+"current_c_all.npy",np.array([jx_c, jy_c, jz_c,x_cor,y_cor,z_cor]) )
     np.save(path+inv+data_basename+"current_c.npy",np.array([current_c,x_cor,y_cor,z_cor]) )
+
+    dx = (x_cor[1]-x_cor[0])
+    dy = (y_cor[1]-y_cor[0])
+    dz = (z_cor[1]-z_cor[0])
+    
+    SI = 31
+    EI = -31
+    j_z_cut = jz_c[:,:,SI:EI]
+    multiplier = 1/(3*j_z_cut[::2,::2,::2].max())
+    cut_off = j_z_cut[::2,::2,::2].max()/20.
+
+    plot_current(jx_c,jy_c,jz_c,x_cor,y_cor,z_cor,path+"current.spt",2,multiplier,cut_off,path)
 
     if correction == True:
         dx = (x_cor[1]-x_cor[0])
