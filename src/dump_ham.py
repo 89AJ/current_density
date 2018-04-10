@@ -18,7 +18,6 @@ import pickle as pickle
 import numpy as np
 from numpy import ascontiguousarray as asc
 
-from new2 import plot_basis, plot_eig
 from utils import *
 
 """ARGPARSE"""

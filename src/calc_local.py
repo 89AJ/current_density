@@ -1,20 +1,16 @@
 import matplotlib
 import pickle
-import numpy as np
-from new2 import plot_dos, plot_transmission, ret_gf_ongrid,\
-                 lesser_gf_ongrid, lesser_se_ongrid,\
-                 fermi_ongrid, calc_trans, calc_trans_mo, start_calc,\
-                 plot_current, plot_complex_matrix, plot_total_current,\
-                 plot_basis, plot_gradient, import_data, lesser_gf_ongrid2,\
-                 cut_matrices, get_nbasis_electrode, retarded_gf2, div,\
-                 orb_grad, Jc_current, get_divJ, plot_real_matrix, gradientO4, plot_local_currents,\
-                 get_local_currents, calc_production, put_matrix_onto_grid, plot_current_red
 from gpaw import setup_paths
-from my_poisson_solver import solve_directly, minus_gradient, solve_with_multigrid
+import numpy as np
 from tqdm import tqdm
 from ase.io import read
 import os
 import argparse
+
+from utils import *
+from my_poisson_solver import solve_directly, minus_gradient, solve_with_multigrid
+
+
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('--path',
                     default='../data/c8/',
@@ -30,8 +26,7 @@ def main(path = path):
     """
     Calculates the current density for a molecule with different basis set.
     """
-    for basis in tqdm(["sz"]):
-        calc(path=path,h=0.2,basis=basis,inv="",grid_size=0,wideband=True,electrode_type="H",ef=ef)
+    calc(path=path,h=0.2,basis="sz",inv="",grid_size=0,wideband=True,electrode_type="H",ef=ef)
 
 def calc(path, h=0.20, co=1e-10, basis='sz', vacuum=4, xc='PBE',\
          bias=1e-3, ef=0, grid_size=0.2/2.,\
@@ -59,7 +54,6 @@ def calc(path, h=0.20, co=1e-10, basis='sz', vacuum=4, xc='PBE',\
     plot_basename = "plots/"+basename
     data_basename = "data/"+basename
 
-    # convert to atomic units
     bias *= eV2au
     ef *= eV2au
     estart *= eV2au
@@ -67,13 +61,10 @@ def calc(path, h=0.20, co=1e-10, basis='sz', vacuum=4, xc='PBE',\
     es *= eV2au
     gamma *= eV2au
 
-    # print "Loading H and S"
     H_ao, S_ao = pickle.load(open(path+'scat_'+fname+'0.pckl', 'rb'))
     H_ao = H_ao[0, 0]
     S_ao = S_ao[0]
     n = len(H_ao)
-    plot_real_matrix(H_ao, path+inv+"H_ao")
-    plot_real_matrix(S_ao, path+inv+"S_ao")
 
     H_cen = H_ao *eV2au
     S_cen = S_ao
@@ -81,11 +72,8 @@ def calc(path, h=0.20, co=1e-10, basis='sz', vacuum=4, xc='PBE',\
     GamR = np.zeros([n,n])
     GamL[0,0] = gamma
     GamR[n-1,n-1] = gamma
-    # V_pot = H_cen - H_kin
-    #H_cen = H_kin
 
-    plot_real_matrix(GamR, path+inv+"GamR")
-    plot_real_matrix(GamL, path+inv+"GamL")
+
 
     print("Calculating transmission")
     """transmission"""
