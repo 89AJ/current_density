@@ -8,6 +8,21 @@ Current density is calculated using hydrogen electrodes.
 git clone https://github.com/89AJ/current_density.git
 ```
 
+## Test that it works!
+```
+cd current_density/src/
+```
+```
+python dump_ham.py
+```
+```
+python calc_local.py
+```
+```
+jmol c8/current.spt
+```
+
+
 ## Run your own calculations
 goto data folder and create a new folders to your molecule
 ```
@@ -30,20 +45,6 @@ Run current density calculation
 python calc_local.py  --path path/to/current_density/data/<folder name>/
 ```
 view using jmol
-```
-jmol c8/current.spt
-```
-
-## Test that it works!
-```
-cd current_density/src/
-```
-```
-python dump_ham.py
-```
-```
-python calc_local.py
-```
 ```
 jmol c8/current.spt
 ```
