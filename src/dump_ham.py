@@ -41,6 +41,8 @@ basis = args.basis
 path = os.path.abspath(args.path) + "/"
 xyzname = args.xyzname
 
+setup_paths.insert(0, '../gpaw_basis/')
+
 """
 Constants
 """
