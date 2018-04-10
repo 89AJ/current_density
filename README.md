@@ -1,24 +1,24 @@
-## Current density calculations with gpaw
+# Current density calculations with gpaw
 
+## Clone the repository
 Step 1:
 git clone https://github.com/89AJ/current_density.git
 
-Step 2:
+## Run a calculations
 cd current_density/src/
 python dump_ham.py
 python calc_local.py
 jmol c8/current.spt
 
 
-#Requirements:
-
+## Requirements:
 On Mac (& Linux?):
 Install conda from website
-pip install ase
-pip install gpaw
+  pip install ase
+  pip install gpaw
 
 On Windows:
-Good luck!
+  Good luck!
 
 
 
