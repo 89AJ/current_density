@@ -1,0 +1,7 @@
+data/c8/basis/
+data/c8/basis_sz__xc_PBE__fdwithd_0.1__kpts_(1, 1, 1)__mode_lcao__vacuum_4__ao_basis_grid.npy
+data/c8/central_region.xyz
+data/c8/positions.npy
+data/c8/scat_basis_sz__xc_PBE__fdwithd_0.1__kpts_(1, 1, 1)__mode_lcao__vacuum_4__0.pckl
+data/c8/symbols.npy
+src/todo.txt
