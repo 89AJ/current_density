@@ -26,20 +26,21 @@ import argparse
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument(
     '--path',
-    default='~/current_density/data/c6sme/',
+    default='../data/c8/',
     help='path to data folder')
 parser.add_argument(
     '--xyzname',
-    default='~/current_density/data/c6sme/c6sme.xyz',
+    default='c8.xyz',
     help='name of the xyz file')
 parser.add_argument('--basis',
                     default='sz',
                     help='basis (sz, dzp, ...)')
 args = parser.parse_args()
 
+import os
 basis = args.basis
-path = args.path
-trajname = args.xyzname
+path = os.path.abspath(args.path) + "/"
+xyzname = args.xyzname
 
 """
 Constants
@@ -55,7 +56,7 @@ basis_full = {'H': 'sz', 'C': basis, 'Si': basis, 'Ge': basis}
 """
 Read molecule
 """
-molecule = read(path + trajname)
+molecule = read(path + xyzname)
 view(molecule)
 
 """
