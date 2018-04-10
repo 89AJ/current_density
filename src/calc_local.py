@@ -8,7 +8,7 @@ import os
 import argparse
 
 from utils import *
-from my_poisson_solver import solve_directly, minus_gradient, solve_with_multigrid
+#from my_poisson_solver import solve_directly, minus_gradient, solve_with_multigrid
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
