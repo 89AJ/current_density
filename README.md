@@ -13,9 +13,6 @@ git clone https://github.com/89AJ/current_density.git
 cd current_density/src/
 ```
 ```
-gpaw-basis H -t sz
-```
-```
 python dump_ham.py
 ```
 ```
