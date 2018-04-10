@@ -42,7 +42,7 @@ python dump_ham.py --path path/to/current_density/data/<folder name>/ --basis sz
 ```
 Run current density calculation
 ```
-python calc_local.py  --path path/to/current_density/data/<folder name>/
+python calc_local.py  --path path/to/current_density/data/<folder name>/ --xyzname your.xyz
 ```
 view using jmol
 ```
