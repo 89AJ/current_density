@@ -1,8 +1,9 @@
 # Current density calculations with gpaw
 
 ## Clone the repository
-Step 1:
+```
 git clone https://github.com/89AJ/current_density.git
+```
 
 ## Run a calculations
 ```
