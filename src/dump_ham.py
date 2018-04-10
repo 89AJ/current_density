@@ -88,8 +88,8 @@ Ef = atoms.calc.get_fermi_level()
 wfs = calc.wfs
 kpt = monkhorst_pack((1, 1, 1))
 
-basename = "basis_{0}__xc_{1}__fdwithd_{2}__kpts_{3}__mode_{4}__vacuum_{5}__".format(
-    basis, xc, FDwidth, kpts, mode, vacuum)
+basename = "basis_{0}__xc_{1}__h_{2}__fdwithd_{3}__kpts_{4}__mode_{5}__vacuum_{6}__".format(
+    basis, xc, h, FDwidth, kpts, mode, vacuum)
 
 dump_hamiltonian_parallel(path + 'scat_' + basename, atoms, direction='z')
 
