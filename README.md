@@ -1,4 +1,7 @@
 # Current density calculations with gpaw
+WORK IN PROGRESS!!
+
+Current density is calculated using hydrogen electrodes. 
 
 ## Clone the repository
 ```
