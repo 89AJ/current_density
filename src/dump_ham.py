@@ -106,3 +106,22 @@ calc.wfs.basis_functions.lcao_to_grid(c_fo_xi, phi_xg, -1)
 np.save(path + basename + "ao_basis_grid", [phi_xg, gd0])
 plot_basis(atoms, phi_xg, ns=len(bfs), folder_name=path + "basis/ao")
 
+# MO - basis
+eig, vec = np.linalg.eig(np.dot(np.linalg.inv(S_ao), H_ao))
+order = np.argsort(eig)
+eig = eig.take(order)
+vec = vec.take(order, axis=1)
+S_mo = np.dot(np.dot(vec.T.conj(), S_ao), vec)
+vec = vec / np.sqrt(np.diag(S_mo))
+S_mo = np.dot(np.dot(vec.T.conj(), S_ao), vec)
+H_mo = np.dot(np.dot(vec.T, H_ao), vec)
+
+rot_mat = vec
+c_fo_xi = asc(rot_mat.real.T)  # coefficients
+mo_phi_xg = calc.wfs.basis_functions.gd.zeros(len(c_fo_xi))
+wfs = calc.wfs
+gd0 = calc.wfs.gd
+calc.wfs.basis_functions.lcao_to_grid(c_fo_xi, mo_phi_xg, -1)
+np.save(path + basename + "mo_energies", eig)
+np.save(path + basename + "mo_basis", mo_phi_xg)
+plot_basis(atoms, mo_phi_xg, ns=len(bfs), folder_name=path + "basis/mo")
