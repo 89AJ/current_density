@@ -106,7 +106,10 @@ calc.wfs.basis_functions.lcao_to_grid(c_fo_xi, phi_xg, -1)
 np.save(path + basename + "ao_basis_grid", [phi_xg, gd0])
 plot_basis(atoms, phi_xg, ns=len(bfs), folder_name=path + "basis/ao")
 
-# MO - basis
+H_ao, S_ao = pickle.load(open(path + 'scat_' + basename + '0.pckl', 'rb'))
+H_ao = H_ao[0, 0]
+S_ao = S_ao[0]
+
 eig, vec = np.linalg.eig(np.dot(np.linalg.inv(S_ao), H_ao))
 order = np.argsort(eig)
 eig = eig.take(order)
